@@ -1,9 +1,9 @@
-import reliable.ReliablePacket;
-import reliable.ReliableSocket;
+package ru.yandex.udp;
+
+import ru.yandex.udp.reliable.ReliablePacket;
+import ru.yandex.udp.reliable.ReliableSocket;
 
 import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
 import java.net.InetAddress;
 
 public class UDPClient {

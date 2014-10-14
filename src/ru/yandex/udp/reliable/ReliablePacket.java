@@ -1,4 +1,4 @@
-package reliable;
+package ru.yandex.udp.reliable;
 
 import java.net.DatagramPacket;
 import java.net.InetAddress;

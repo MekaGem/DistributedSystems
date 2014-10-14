@@ -1,4 +1,4 @@
-package reliable;
+package ru.yandex.udp.reliable;
 
 import java.io.IOException;
 import java.net.*;
