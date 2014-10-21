@@ -68,6 +68,27 @@ enum DiskOperation {
                 System.out.println("ERROR");
             }
         }
+    },
+    RM("rm", 1, "DELETE") {
+        @Override
+        public String getURL(String resourcesURL, List<String> params) throws UnsupportedEncodingException {
+            String path = URLEncoder.encode(params.get(0), "UTF-8");
+            return resourcesURL + "?path=" + path;
+        }
+
+        @Override
+        public void processReply(String reply) {
+            if (reply == null) {
+                System.out.println("OK");
+                return;
+            }
+            try {
+                JSONObject jsonObject = new JSONObject(reply);
+                System.out.println("OK");
+            } catch (JSONException e) {
+                System.out.println("ERROR");
+            }
+        }
     };
 
     private final String cmd;
