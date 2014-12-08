@@ -19,17 +19,21 @@ enum DiskOperation {
 
         @Override
         public void processReply(String reply) {
-            JSONObject jsonObject = new JSONObject(reply);
-            if (jsonObject.has("_embedded")) {
-                // Directory
-                JSONArray files = jsonObject.getJSONObject("_embedded").getJSONArray("items");
-                for (int index = 0; index < files.length(); ++index) {
-                    JSONObject file = files.getJSONObject(index);
-                    System.out.println(file.getString("name"));
+            try {
+                JSONObject jsonObject = new JSONObject(reply);
+                if (jsonObject.has("_embedded")) {
+                    // Directory
+                    JSONArray files = jsonObject.getJSONObject("_embedded").getJSONArray("items");
+                    for (int index = 0; index < files.length(); ++index) {
+                        JSONObject file = files.getJSONObject(index);
+                        System.out.println(file.getString("name"));
+                    }
+                } else {
+                    // File
+                    System.out.println(jsonObject.getString("name"));
                 }
-            } else {
-                // File
-                System.out.println(jsonObject.getString("name"));
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
         }
     },
