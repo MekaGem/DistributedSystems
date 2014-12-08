@@ -1,41 +1,30 @@
 package ru.yandex.storage.coordinator;
 
-class TestFailedException extends Exception
-{
-    TestFailedException(String message)
-    {
-        super(message);
-    }
-}
-
-public class TestCoordinator
-{
+public class TestCoordinator {
     static void test(ViewInfo info,
                      String primary,
                      String backup,
                      int view,
-                     String description) throws TestFailedException
-    {
+                     String description) throws TestFailedException {
         if (!primary.equals(info.primary)) {
             System.err.println("Wrong primary: expected " + primary +
-                               ", got " + info.primary);
+                    ", got " + info.primary);
             throw new TestFailedException(description);
         }
         if (!backup.equals(info.backup)) {
             System.err.println("Wrong backup: expected " + backup +
-                               ", got " + info.backup);
+                    ", got " + info.backup);
             throw new TestFailedException(description);
         }
-        if (view != info.view ) {
+        if (view != info.view) {
             System.err.println("Wrong view number: expected " + view +
-                               ", got " + info.view);
+                    ", got " + info.view);
             throw new TestFailedException(description);
         }
         System.err.println("Test passed: " + description);
     }
 
-    public static void main (String[] argv) throws Exception
-    {
+    public static void main(String[] argv) throws Exception {
         Coordinator service = new Coordinator();
         int longDelay = Coordinator.DEAD_PINGS * 2;
         String srv1 = "localhost:10001";

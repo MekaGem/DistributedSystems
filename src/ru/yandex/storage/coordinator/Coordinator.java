@@ -1,7 +1,7 @@
 package ru.yandex.storage.coordinator;
 
-import java.rmi.*;
-import java.rmi.server.*;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -57,7 +57,7 @@ public class Coordinator extends UnicastRemoteObject implements CoordinatorInter
     // this method is to be called automatically as time goes by
     public void tick() {
         Iterator<Map.Entry<String, Long>> iterator = lastPing.entrySet().iterator();
-        for (; iterator.hasNext();) {
+        for (; iterator.hasNext(); ) {
             Map.Entry<String, Long> entry = iterator.next();
             if (currentTime - entry.getValue() >= DEAD_PINGS) {
                 if (!entry.getKey().equals(viewInfo.primary) || dataSavedOnBackup) {
@@ -81,7 +81,6 @@ public class Coordinator extends UnicastRemoteObject implements CoordinatorInter
         if (viewInfo.primary.isEmpty() || viewInfo.backup.isEmpty()) {
             dataSavedOnBackup = false;
         }
-
 
 
         if (viewInfo.primary.isEmpty()) {
